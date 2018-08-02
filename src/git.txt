@@ -1,0 +1,66 @@
+git的指令
+git init 本地仓库初识化
+git config 配置
+git config user.name "" 配置你的提交名称
+git config user.email "" 配置你的提交邮箱
+git config --global user.name "" 配置你的全局提交名称
+git config --global user.email "" 配置你的全局提交邮箱
+git status 查看项目下的文件的提交状态
+git add 文件名 添加该文件到git本地仓库
+git commit 提交文件到本地仓库
+git commit -m "描述信息" 提交加描述文件的内容一键完成
+git log 查看文件的版本
+git log --pretty=oneline 查看文件的版本以一行显示
+git reset --hard HEAD^ 强制返回上一个版本
+git reset  --hard HEAD~2 强制返回到前两个版本
+git reflog 查看所有的版本(包括强制还原的版本)和你的所有版本还原的操作
+git reset --hard 版本号 指定回到某一个版本
+git checkout -- 文件名 把你库中最新的文件还原
+删除文件，先删除本地的文件，然后再提交。
+git中相关的概念：
+工作区：就是你电脑本地硬盘目录
+本地库：工作区有个隐藏目录.git，它就是Git的本地版本库
+暂存区：一般存放在git目录下的index文件(.git/index)中，所以我们把暂存区有时也叫作索引(index)
+git branch -v 查看当前版本的分支
+git branch 分支名 创建新的分支
+git checkout 分支名 切换到新的分支
+git merge 分支名 把指定的分支合并到当前分支上
+冲突：
+产生：在合并分支的时候，出现两个文件修改了同一行的代码，git不知道保存那一行数据
+解决办法：用vim文本编辑器，决定你要保存哪一行的代码，删除不需要的代码，然后保存，最后提交
+git diff 可以找到发生冲突的文件及冲突的内容还可以查看文件修改的内容
+git与github同步代码的过程:
+自己上传代码到GitHub:
+1.搭建代码库:
+1)git init
+2)git config
+2.提交代码:
+1)git add xxx
+2)git commit
+3GitHub准备工作:
+1)注册GitHub账号
+2)在GitHub搭建项目
+4.推送到远端
+1)git remote add origin<url>
+2)git push origin master 把一个分支提交到github
+别人克隆你的代码:
+5.git clone<url> 别名 下载别人的代码并取好别名
+6.别人开发你的代码(写好了)
+1)git add xxx
+2)git commit
+7.别人提交自己的代码
+git push
+8.自己在拉回本地查看修改的代码
+git pull
+两种模式：https vs ssh
+ssh模式比https模式的一个重要好处就是，每次push，pull,fetch等操作时不用重复填写用户名和密码
+前提是你必须是这个项目的拥有者或者合作者，且配好了ssh key
+配置ssh key:
+1.cd ~ cd .ssh 查看有没有这个文件
+2.rm -rvf .ssh 删除该文件夹，如果存在删除，不存在可以忽略
+3.ssh-keygen -t rsa -C 邮箱地址 创建SSH Key
+4.cat id_rsa.pub 查看自己的公开的密钥
+5.复制自己的密钥要云端
+利用ssh连接上传代码到github上:
+1)git remote add origin<url> 此url是使用ssh的连接的地址，不是用https连接地址的
+2)git push origin master 把一个分支提交到github
